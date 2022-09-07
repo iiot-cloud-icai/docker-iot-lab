@@ -29,13 +29,12 @@ client.loop_start()
 sense = SenseHat 
 
 while True:
-    temp = sense.temp
-    humidity = sense.humidity
-    humidity_value = 64 * humidity / 100
+    temp = sense.get_temperature()
+    humidity = sense.get_humidity()
     measurements = {}
-    measurements = {"labGroupXX": "groupXX", "temperature": temp, "humidity": humidity_value}
+    measurements = {"labGroup": "groupXX", "temperature": temp, "humidity": humidity}
 
-    client.publish(topic="", payload=json.dumps(measurements))
+    client.publish(topic="IIoT/your_group", payload=json.dumps(measurements))
     print("Measurements sent")
     time.sleep(10)
 
